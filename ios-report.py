@@ -8,26 +8,26 @@ import re
 import logging
 
 
-#here is list of cisco switches ip addresses
+#List of cisco switches ip addresses, add as many as you want in the same format.
 ip_list = [
-'10.216.118.254',  '10.216.16.253'
+'192.168.0.1',  '192.168.0.2'
 ]
 
 #Enable Netmiko logging level DEBUG
-logging.basicConfig(filename=r'C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\netmiko_global.log', level=logging.DEBUG)
+logging.basicConfig(filename=r'C:\Users\YOUR_PATH\netmiko_global.log', level=logging.DEBUG)
 logger = logging.getLogger("netmiko")
 
-#list where informations will be stored
+#List where informations will be stored
 devices = []
 
-#clearing the old data from the CSV file and writing the headers
-f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\IOS.csv", "w+")
+#Clearing the old data from the CSV file and writing the headers
+f = open(r"C:\Users\YOUR_PATH\IOS-Report.csv", "w+")
 f.write("IP Address, Hostname, Uptime, Current_Version, Current_Image, Serial_Number, Device_Model, Device_Memory")
 f.write("\n")
 f.close()
 
-#clearing the old data from the CSV file and writing the headers
-f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\login_issues.csv", "w+")
+#Clearing the old data from the CSV file and writing the headers
+f = open(r"C:\Users\YOUR_PATH\Login_issues.csv", "w+")
 f.write("IP Address, Status")
 f.write("\n")
 f.close()
@@ -51,25 +51,25 @@ for ip in ip_list:
     try:
         net_connect = ConnectHandler(**cisco)
     except NetMikoTimeoutException:
-        f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\login_issues.csv", "a")
+        f = open(r"C:\Users\YOUR_PATH\login_issues.csv", "a")
         f.write(ip + "," + "Device Unreachable/SSH not enabled")
         f.write("\n")
         f.close()
         continue
     except AuthenticationException:
-        f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\login_issues.csv", "a")
+        f = open(r"C:\Users\YOUR_PATH\login_issues.csv", "a")
         f.write(ip + "," + "Authentication Failure")
         f.write("\n")
         f.close()
         continue
     except SSHException:
-        f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\login_issues.csv", "a")
+        f = open(r"C:\Users\YOUR_PATH\login_issues.csv", "a")
         f.write(ip + "," + "SSH not enabled")
         f.write("\n")
         f.close()
         continue
     except socket_error as socket_err:
-        f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\login_issues.csv", "a")
+        f = open(r"C:\Users\YOUR_PATH\login_issues.csv", "a")
         f.write(ip + "," + "Connection Refused")
         f.write("\n")
         f.close()
@@ -79,7 +79,7 @@ for ip in ip_list:
 
     #handling exceptions errors        
     except ValueError:
-        f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\login_issues.csv", "a")
+        f = open(r"C:\Users\YOUR_PATH\login_issues.csv", "a")
         f.write(ip + "," + "Could be SSH Enable Password issue")
         f.write("\n")
         f.close()
@@ -131,7 +131,7 @@ for ip in ip_list:
 #print all results (for all switches) on screen    
 for i in devices:
     i = ", ".join(map(str,i))     
-    f = open(r"C:\Users\jhurtado\OneDrive - SDI Presence LLC\Desktop\IOS.csv", "a")
+    f = open(r"C:\Users\YOUR_PATH\IOS-Report.csv", "a")
     f.write(i)
     f.write("\n")
     f.close()
