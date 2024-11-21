@@ -1,4 +1,4 @@
-This is a Python script that will get a report on the current IOS version, updatime, boot image, IP, hostname, and model of Cisco equipment.
+This is a Python script that will get a report on the current IOS version, uptime, boot image, IP address, hostname, and model of Cisco equipment.
 
 This script will save this information in a CSV file, so you must make sure that the CSV file exists in the desired location. 
 
