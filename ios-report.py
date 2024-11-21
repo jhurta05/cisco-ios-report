@@ -13,9 +13,9 @@ ip_list = [
 '192.168.0.1',  '192.168.0.2'
 ]
 
-#Enable Netmiko logging level DEBUG
-logging.basicConfig(filename=r'C:\Users\YOUR_PATH\netmiko_global.log', level=logging.DEBUG)
-logger = logging.getLogger("netmiko")
+#Enable Netmiko logging level DEBUG - OPTIONAL, you have to uncomment.
+#logging.basicConfig(filename=r'C:\Users\YOUR_PATH\netmiko_global.log', level=logging.DEBUG)
+#logger = logging.getLogger("netmiko")
 
 #List where informations will be stored
 devices = []
